@@ -8,6 +8,17 @@
 
 ## High Priority
 
+### PQW-029: Embed the Prowl hero-loop demo video from prowl-remotion
+
+**Priority**: High
+**Description**: `prowl-remotion` PRM-011 produces a 12-second, muted, looping 16:9 clip of a hunt being written and run (`HeroLoop-website`). Create `content/videos/` and commit the deployed render there as `hero-loop.mp4` with a poster frame, then embed it on the homepage (hero right column or the "How it works" section) as a `<video>` with `autoplay muted loop playsinline`, `preload="metadata"`, the poster image, and a `prefers-reduced-motion` fallback that shows only the poster. Keep the file under 10 MB and served from the repo (Vercel), not an external host. Cross-repo: the render is owned by `prowl-remotion` (PRM-011, hand-off PRM-012); the embed is owned here.
+**Acceptance Criteria**:
+- `content/videos/hero-loop.mp4` and `content/videos/hero-loop-poster.jpg` committed, sourced from `prowl-remotion/website/deploy/hero-loop/`
+- Video plays muted, loops without controls, and does not shift layout (explicit aspect ratio)
+- Reduced-motion users see the poster only; no autoplay
+- Lighthouse performance and CLS on the homepage unchanged within noise
+- Blog and homepage hunts still pass
+
 ## Medium Priority
 
 ### PQW-028: Update the macOS install copy once the bundled helper ships
