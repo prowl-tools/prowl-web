@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { test } from 'node:test';
 
-const REVIEW_ACTION_SHA = '4e60b282f3837b3f09b2a9d0c74f19eef2804c10';
+const REVIEW_ACTION_SHA = 'e7f0431b7daf2cc818a003c5ac216f29e7da3c53';
 const REPOSITORY = 'prowl-tools/prowl-web';
 const BASE_SHA = 'd478fb5dc46c96361dc1f9c8fde76aa745dbc884';
 const HEAD_SHA = '6d51eaa779368e4f4dd40b5ea9cd2b7882f12397';

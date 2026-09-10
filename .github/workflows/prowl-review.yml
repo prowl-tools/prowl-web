@@ -344,7 +344,7 @@ jobs:
         # Temporary SHA pin: current v1 lacks the Codex provider, so keep the
         # reviewed Codex-capable commit until prowl-code-review publishes a
         # stable Codex-capable tag. Re-check monthly and migrate to that tag.
-        uses: prowl-tools/prowl-code-review@4e60b282f3837b3f09b2a9d0c74f19eef2804c10
+        uses: prowl-tools/prowl-code-review@e7f0431b7daf2cc818a003c5ac216f29e7da3c53
         env:
           # Trusted head identity re-derived from the resolved PR; the action reads
           # these for stale-head detection and same-repo (non-fork) confirmation.
