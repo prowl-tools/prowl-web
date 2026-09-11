@@ -166,7 +166,7 @@ jobs:
         # Temporary SHA pin: current v1 lacks the Codex provider, so keep the
         # reviewed Codex-capable commit until prowl-code-review publishes a
         # stable Codex-capable tag. Re-check monthly and migrate to that tag.
-        uses: prowl-tools/prowl-code-review@e7f0431b7daf2cc818a003c5ac216f29e7da3c53
+        uses: prowl-tools/prowl-code-review@3283f94d950db3f543ebafc312a15241f1f11800
         env:
           PROWL_REVIEWED_HEAD_SHA: ${{ needs.resolve.outputs.head_sha }}
           PROWL_REVIEWED_HEAD_REPOSITORY: ${{ needs.resolve.outputs.head_repo }}
