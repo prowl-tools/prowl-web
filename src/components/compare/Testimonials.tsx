@@ -24,7 +24,8 @@ export default function Testimonials() {
   return (
     <SectionReveal>
       <section className="px-6 pb-20">
-        <motion.div className="mx-auto w-full max-w-7xl" variants={staggerContainer} {...reveal}>
+        <motion.div className="mx-auto w-full max-w-7xl" variants={staggerContainer} key={reveal.remountKey}
+        {...reveal.motionProps}>
           <motion.p variants={fadeUp} className="text-xs uppercase tracking-[0.2em] text-muted">
             From the people using it
           </motion.p>

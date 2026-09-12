@@ -20,7 +20,8 @@ export default function Comparison() {
         <motion.div
           className="mx-auto w-full max-w-7xl"
           variants={staggerContainer}
-          {...reveal}
+          key={reveal.remountKey}
+          {...reveal.motionProps}
         >
           <motion.p variants={fadeUp} className="text-xs uppercase tracking-[0.2em] text-muted">
             How it compares
