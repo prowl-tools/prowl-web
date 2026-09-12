@@ -1,55 +1,78 @@
 /**
- * "How Prowl compares" table. Every cell must be a factual, verifiable claim
- * drawn from each project's public documentation (prowl LEGAL-004 — FTC
- * comparative-advertising guidelines): describe what each tool does, never
- * disparage. Re-check `asOf` when editing a cell.
+ * "How Prowl compares" capability data, rendered as per-tool cards on
+ * /compare. Every cell must be a factual, verifiable claim drawn from each
+ * project's public documentation (prowl LEGAL-004 — FTC comparative-advertising
+ * guidelines): describe what each tool does, never disparage. Re-check `asOf`
+ * when editing a cell.
+ *
+ * Each cell carries a machine-readable `status` (drives the card's icon) plus
+ * the factual `text` shown beside it; `status: null` renders text only (for
+ * rows like languages, where support levels don't apply).
  */
 
 export const comparisonAsOf = "August 2026";
 
 export const comparisonColumns = ["Prowl", "Maestro", "Playwright", "XCUITest"] as const;
 
+/** Support level rendered as the cell's icon; `null` renders text alone. */
+export type ComparisonStatus = "yes" | "no" | "partial" | null;
+
+export interface ComparisonCell {
+  status: ComparisonStatus;
+  text: string;
+}
+
 export interface ComparisonRow {
   label: string;
   /** One cell per entry in `comparisonColumns`, in order. */
-  cells: [string, string, string, string];
+  cells: [ComparisonCell, ComparisonCell, ComparisonCell, ComparisonCell];
 }
 
 export const comparisonRows: ComparisonRow[] = [
   {
     label: "Native macOS apps",
     cells: [
-      "Yes — Accessibility API, menu bar extras included",
-      "No",
-      "Electron apps only (experimental)",
-      "Yes — apps built with Xcode",
+      { status: "yes", text: "Accessibility API, menu bar extras included" },
+      { status: "no", text: "Not supported" },
+      { status: "partial", text: "Electron apps only, experimental" },
+      { status: "yes", text: "Apps built with Xcode" },
     ],
   },
   {
     label: "Web apps",
     cells: [
-      "Yes — Playwright (Chromium, Firefox, WebKit)",
-      "Yes",
-      "Yes — Chromium, Firefox, WebKit",
-      "No",
+      { status: "yes", text: "Playwright — Chromium, Firefox, WebKit" },
+      { status: "yes", text: "Supported" },
+      { status: "yes", text: "Chromium, Firefox, WebKit" },
+      { status: "no", text: "Not supported" },
     ],
   },
   {
     label: "Native mobile apps",
     cells: [
-      "Android & iOS Simulator — experimental",
-      "Yes — iOS and Android",
-      "No",
-      "iOS",
+      { status: "partial", text: "Android & iOS Simulator — experimental" },
+      { status: "yes", text: "iOS and Android" },
+      { status: "no", text: "Not supported" },
+      { status: "yes", text: "iOS only" },
     ],
   },
   {
     label: "Tests are written in",
-    cells: ["YAML", "YAML", "JavaScript / TypeScript, Python, Java, .NET", "Swift / Objective-C"],
+    cells: [
+      { status: null, text: "YAML" },
+      { status: null, text: "YAML" },
+      { status: null, text: "JavaScript / TypeScript, Python, Java, .NET" },
+      { status: null, text: "Swift / Objective-C" },
+    ],
   },
   {
     label: "Runs from",
-    cells: ["One CLI — any terminal or CI", "CLI (requires Java)", "Test runner / CLI", "Xcode / xcodebuild"],
+    cells: [
+      { status: null, text: "One CLI — any terminal or CI" },
+      { status: null, text: "CLI (requires Java)" },
+      { status: null, text: "Test runner / CLI" },
+      { status: null, text: "Xcode / xcodebuild" },
+    ],
   },
 ];
 

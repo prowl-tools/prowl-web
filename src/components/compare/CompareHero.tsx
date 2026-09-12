@@ -33,8 +33,7 @@ export default function CompareHero() {
           variants={fadeUp}
           className="mx-auto mt-7 max-w-4xl text-4xl font-semibold leading-tight tracking-tight sm:text-5xl"
         >
-          Prowl compared to Maestro, Playwright, and{' '}
-          <GradientText>XCUITest</GradientText>
+          How does Prowl <GradientText>compare</GradientText>?
         </motion.h1>
 
         <motion.p
@@ -63,7 +62,7 @@ export default function CompareHero() {
             href="#matrix"
             className="inline-flex items-center justify-center rounded-md border border-border bg-surface px-6 py-3 text-sm font-semibold transition hover:border-cyan/60 hover:bg-surface-elevated focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan"
           >
-            See the capability table
+            Compare capabilities
           </a>
         </motion.div>
       </motion.div>

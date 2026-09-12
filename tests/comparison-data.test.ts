@@ -8,10 +8,10 @@ import {
 } from "../src/lib/comparison-data.ts";
 
 /**
- * The comparison table is comparative advertising (prowl LEGAL-004): every row
- * must line up with the column headers, every cell must be a concrete statement,
- * competitors must be named accurately, and the disclaimer must date the claims
- * and disown any affiliation.
+ * The capability cards are comparative advertising (prowl LEGAL-004): every row
+ * must line up with the tool columns, every cell must be a concrete statement
+ * with a valid status, competitors must be named accurately, and the disclaimer
+ * must date the claims and disown any affiliation.
  */
 describe("comparison-data", () => {
   it("has Prowl in the first column and named competitors after it", () => {
@@ -19,13 +19,17 @@ describe("comparison-data", () => {
     assert.deepEqual(comparisonColumns.slice(1), ["Maestro", "Playwright", "XCUITest"]);
   });
 
-  it("gives every row exactly one non-empty cell per column", () => {
+  it("gives every row exactly one complete cell per column", () => {
     assert.ok(comparisonRows.length > 0);
     for (const row of comparisonRows) {
       assert.ok(row.label.trim().length > 0, "row label is set");
       assert.equal(row.cells.length, comparisonColumns.length, `${row.label} cell count`);
       for (const cell of row.cells) {
-        assert.ok(cell.trim().length > 0, `${row.label} has an empty cell`);
+        assert.ok(cell.text.trim().length > 0, `${row.label} has an empty cell`);
+        assert.ok(
+          cell.status === "yes" || cell.status === "no" || cell.status === "partial" || cell.status === null,
+          `${row.label} has a valid status`,
+        );
       }
     }
   });
@@ -34,15 +38,16 @@ describe("comparison-data", () => {
     const banned = /\b(worse|inferior|broken|slow|clunky|bloated|outdated|only\s+prowl)\b/i;
     for (const row of comparisonRows) {
       for (const cell of row.cells) {
-        assert.doesNotMatch(cell, banned, `${row.label}: "${cell}"`);
+        assert.doesNotMatch(cell.text, banned, `${row.label}: "${cell.text}"`);
       }
     }
   });
 
-  it("keeps the experimental caveat on Prowl's mobile claim", () => {
+  it("keeps the experimental caveat and partial status on Prowl's mobile claim", () => {
     const mobile = comparisonRows.find((row) => row.label === "Native mobile apps");
     assert.ok(mobile, "mobile row exists");
-    assert.match(mobile.cells[0], /experimental/i);
+    assert.match(mobile.cells[0].text, /experimental/i);
+    assert.equal(mobile.cells[0].status, "partial");
   });
 
   it("dates the claims and names every competitor in the disclaimer", () => {

@@ -58,7 +58,9 @@ All notable changes to the Prowl Tools marketing site (`prowl.tools`) are docume
   "Maestro / Playwright / XCUITest alternative" searches. Sections: a hero, Prowl's desktop-first
   unique angle, a practitioner pain-point narrative spine (paraphrased frustrations,
   not testimonials), a fair "best for" profile per competitor (Maestro, Playwright,
-  XCUITest, Cypress, Selenium) with how Prowl relates, a capability matrix reusing
+  XCUITest, Cypress, Selenium) with how Prowl relates, a per-tool capability card
+  grid (one card per tool with status icons, Prowl's card accented — owner pick from
+  three format options, 2026-09-12) reusing
   `src/lib/comparison-data.ts` as the single source of claims, an honest "not for
   you if…" section, a testimonials block that renders nothing while its data array is
   intentionally empty (no fabricated quotes/logos ever), and a comparison FAQ.
