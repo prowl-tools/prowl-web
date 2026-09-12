@@ -38,6 +38,25 @@ All notable changes to the Prowl Tools marketing site (`prowl.tools`) are docume
   `docs-page.yml`, `homepage.yml`) and deleted `code-review-page.yml`.
 
 ### Added
+- Competitive-positioning comparison page at `/compare` (implements the cross-repo
+  item `prowl` PROWL-037 / GTM-002): a dedicated, SEO/GEO-targeted landing page for
+  "Maestro / Playwright / XCUITest alternative" searches, complementing the homepage
+  comparison table (which now links to it). Sections: a hero, Prowl's desktop-first
+  unique angle, a practitioner pain-point narrative spine (paraphrased frustrations,
+  not testimonials), a fair "best for" profile per competitor (Maestro, Playwright,
+  XCUITest, Cypress, Selenium) with how Prowl relates, a capability matrix reusing
+  `src/lib/comparison-data.ts` as the single source of claims, an honest "not for
+  you if…" section, a testimonials block that renders nothing while its data array is
+  intentionally empty (no fabricated quotes/logos ever), and a comparison FAQ.
+  Claims live in reviewable data modules (`src/lib/competitors-data.ts`,
+  `src/lib/compare-faq-data.ts`, `src/lib/testimonials-data.ts`) — factual, dated
+  (`compareAsOf`), non-disparaging, with a trademark disclaimer naming every
+  competitor and Prowl's mobile/macOS targets kept labelled experimental (LEGAL-004).
+  Page metadata sets a `/compare` canonical, OG, and Twitter cards; the route is added
+  to the sitemap (priority 0.9) and linked from the nav (desktop + mobile) and the
+  footer Resources column. Unit tests cover the data modules and the sitemap entry,
+  and a `compare` hunt asserts the sections, the single `h1`, the CTA, and that no
+  testimonial placeholder renders.
 - Desktop-first homepage (PQW-027, re-scoping PQW-024): a new hero that leads with
   native macOS apps and web apps from one YAML hunt (using the menu bar example
   from the macOS target guide), a "Change the target, not the test" section that

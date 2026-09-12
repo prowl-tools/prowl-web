@@ -1,0 +1,55 @@
+name: compare
+description: The /compare competitive-positioning page renders its sections, CTA, and a single h1
+tags:
+  - full
+
+steps:
+  - navigate: "/compare"
+
+  - waitForNetworkIdle:
+      timeout: 5000
+
+  # Hero (the page's single h1)
+  - assert:
+      visible: "Prowl compared to Maestro, Playwright, and"
+
+  # Prowl's unique angle — desktop-first
+  - assert:
+      visible: "One test format, desktop first"
+
+  # Pain-point narrative spine
+  - assert:
+      visible: "The frustrations we built around"
+
+  # "Best for" competitor profiles
+  - assert:
+      visible: "What each tool is best at"
+
+  # Capability matrix
+  - assert:
+      visible: "Side by side"
+
+  # Honest limits
+  - assert:
+      visible: "Honest limits"
+
+  # Comparison FAQ
+  - assert:
+      visible: "Comparison FAQ"
+
+assertions:
+  # Exactly one top-level heading (accessible document outline / SEO).
+  - selectorExists: "h1"
+  - selectorNotExists: ":nth-match(h1, 2)"
+  # In-page anchors used by the hero CTA and internal links.
+  - selectorExists: "#matrix"
+  - selectorExists: "#best-for"
+  # Primary CTA points at the docs site.
+  - selectorExists: "a[href^='https://docs.prowl.tools']"
+  # No fabricated-testimonial placeholder renders while the data array is empty.
+  - selectorNotExists: "blockquote"
+  # PQW-025: no retired product links anywhere on the page.
+  - selectorNotExists: "a[href*='hub.prowl.tools']"
+  - selectorNotExists: "a[href*='infra.prowl.tools']"
+  - selectorNotExists: "a[href*='review.prowl.tools']"
+  - noConsoleErrors: true
