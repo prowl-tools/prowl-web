@@ -41,9 +41,8 @@ export default function CompareHero() {
           className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted sm:text-lg"
         >
           Every one of these tools is genuinely good at something. Prowl holds the one
-          position none of them do: it tests a native macOS app — menu bar extras included —
-          and a web app from the same YAML file. Here is an honest look at where each fits,
-          and where Prowl leads.
+          position none of them do; testing native macOS apps. Here is an honest look at
+          where each fits, and where Prowl leads.
         </motion.p>
 
         <motion.div
