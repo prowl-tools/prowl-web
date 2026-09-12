@@ -35,6 +35,6 @@ export const compareFaqItems: FaqItem[] = [
   {
     question: "Why choose Prowl over a code-based framework?",
     answer:
-      "Because your app is a Mac app and a web app, and you would rather write one YAML hunt than maintain a Swift suite and a JavaScript suite separately. Prowl is also agent-native — structured JSON output and an MCP server — and self-sovereign: your tests, history, and keys stay in your repo with no metered pricing.",
+      "Because your app is a Mac app and a web app, and you would rather write one YAML hunt than maintain a Swift suite and a JavaScript suite separately. Prowl is also agent-native — structured JSON output and an MCP server — and self-sovereign: your tests and run history stay in your repo, AI-assisted steps run on your own provider key, and there is no metered pricing.",
   },
 ];

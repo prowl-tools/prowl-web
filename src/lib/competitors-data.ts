@@ -43,7 +43,7 @@ export interface CompetitorProfile {
 export const competitorProfiles: CompetitorProfile[] = [
   {
     name: "Maestro",
-    what: "A mobile UI testing framework from mobile.dev that drives native iOS and Android apps from declarative YAML flows.",
+    what: "A mobile-first UI testing framework from mobile.dev that drives native iOS and Android apps — and web apps — from declarative YAML flows.",
     bestFor:
       "Native mobile teams who want the simplicity of YAML flows for iOS and Android, with built-in tolerance for asynchronous UIs and an optional hosted cloud to run them.",
     prowlAngle:
@@ -162,7 +162,7 @@ export const painPoints: PainPoint[] = [
   {
     pain: "“I want something agent-native and AI-assisted that runs locally on my own key, with no lock-in.”",
     answer:
-      "That is Prowl's mission. Structured JSON output and an MCP server make it agent-native, AI-assisted steps run on your own provider key, and everything — hunts, history, baselines — stays in your repo. No metered pricing, no data leaving your machine.",
+      "That is Prowl's mission. Structured JSON output and an MCP server make it agent-native, AI-assisted steps run on your own provider key — paid directly to the provider, never routed through us — and everything Prowl produces (hunts, history, baselines) stays in your repo. No metered pricing, no lock-in.",
   },
 ];
 
