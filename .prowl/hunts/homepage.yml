@@ -22,11 +22,14 @@ steps:
   - assert:
       visible: "Built for AI-assisted development"
 
+  # Slim comparison teaser (replaced the full "Desktop and web from the same
+  # file" table section, 2026-09-12) — links to the dedicated /compare page.
   - assert:
-      visible: "Desktop and web from the same file"
+      visible: "How does Prowl compare?"
 
 assertions:
   - selectorExists: "h1"
+  - selectorExists: "a[href='/compare']"
   - selectorNotExists: ":nth-match(h1, 2)"
   - selectorExists: "#how-it-works"
   - selectorExists: "a[href^='https://docs.prowl.tools']"
