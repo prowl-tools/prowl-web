@@ -11,7 +11,7 @@ steps:
 
   # Hero (the page's single h1)
   - assert:
-      visible: "How does Prowl compare?"
+      visible: "How does Prowl compare"
 
   # Prowl's unique angle — desktop-first
   - assert:

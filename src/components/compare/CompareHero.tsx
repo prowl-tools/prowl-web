@@ -33,7 +33,7 @@ export default function CompareHero() {
           variants={fadeUp}
           className="mx-auto mt-7 max-w-4xl text-4xl font-semibold leading-tight tracking-tight sm:text-5xl"
         >
-          How does Prowl <GradientText>compare</GradientText>?
+          How does Prowl <GradientText>compare</GradientText>
         </motion.h1>
 
         <motion.p
