@@ -1,4 +1,5 @@
 import { compareFaqItems } from '@/lib/compare-faq-data';
+import { competitorDisclaimer } from '@/lib/competitors-data';
 
 export default function CompareFaq() {
   return (
@@ -19,6 +20,13 @@ export default function CompareFaq() {
             </details>
           ))}
         </div>
+
+        {/* Page-wide trademark disclaimer — names every tool mentioned anywhere
+            on /compare (Cypress and Selenium appear only in the FAQ and the
+            "not for you if…" section, so this fuller disclaimer lives here). */}
+        <p className="mx-auto mt-6 max-w-4xl text-xs leading-relaxed text-muted">
+          {competitorDisclaimer}
+        </p>
       </div>
     </section>
   );

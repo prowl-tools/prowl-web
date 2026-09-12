@@ -8,8 +8,6 @@
  *  - Every claim about another tool must be factual and verifiable from that
  *    project's own public documentation. Describe what each tool is good at;
  *    never disparage it.
- *  - Give each competitor a fair "best for" — the page's credibility comes
- *    from being honest about where a rival is the better choice.
  *  - Re-check `compareAsOf` (shared with the homepage table) whenever a claim
  *    is edited, and keep `competitorNames` in sync with the trademark
  *    disclaimer so every named tool is disowned as an affiliation.
@@ -24,64 +22,11 @@ import { comparisonAsOf } from "./comparison-data.ts";
 export const compareAsOf = comparisonAsOf;
 
 /**
- * The competitors named anywhere on the page. Drives the trademark disclaimer
- * and is asserted against the profiles in the unit test so the two never drift.
+ * The competitors named anywhere on the page (the capability cards, the "not
+ * for you if…" section, and the FAQ). Drives the trademark disclaimer and is
+ * asserted in the unit test so the two never drift.
  */
 export const competitorNames = ["Maestro", "Playwright", "XCUITest", "Cypress", "Selenium"] as const;
-
-export interface CompetitorProfile {
-  /** Tool name, spelled and capitalised as its own project does. */
-  name: string;
-  /** What the tool is, in one factual clause. */
-  what: string;
-  /** A fair, genuine statement of what this tool is best at. */
-  bestFor: string;
-  /** How Prowl relates — factual, non-disparaging, no "better than" claims. */
-  prowlAngle: string;
-}
-
-export const competitorProfiles: CompetitorProfile[] = [
-  {
-    name: "Maestro",
-    what: "A mobile-first UI testing framework from mobile.dev that drives native iOS and Android apps — and web apps — from declarative YAML flows.",
-    bestFor:
-      "Native mobile teams who want the simplicity of YAML flows for iOS and Android, with built-in tolerance for asynchronous UIs and an optional hosted cloud to run them.",
-    prowlAngle:
-      "Prowl shares the YAML-first philosophy but leads on the desktop: it drives native macOS apps and web apps from the same hunt file. Its own iOS Simulator and Android targets are experimental, so for production native-mobile coverage today Maestro is the more mature choice.",
-  },
-  {
-    name: "Playwright",
-    what: "Microsoft's browser automation library and test runner (Playwright Test) for the web, scripted in TypeScript, JavaScript, Python, Java, or .NET.",
-    bestFor:
-      "Web teams who want their tests in a full programming language, with a large ecosystem, cross-browser coverage across Chromium, Firefox, and WebKit, tracing, and rich parallelisation.",
-    prowlAngle:
-      "Prowl runs Playwright under the hood on its web target, so you get the same auto-waiting and Chromium/Firefox/WebKit engines — described in YAML instead of code, and reusable against a native macOS app. When a flow outgrows YAML, Prowl's library API lets you drop into TypeScript, and Playwright itself remains the right tool for web suites that live entirely in code.",
-  },
-  {
-    name: "XCUITest",
-    what: "Apple's first-party UI testing framework, written in Swift or Objective-C and run from Xcode or xcodebuild against iOS and macOS apps.",
-    bestFor:
-      "Teams already working in Xcode and Swift who want in-process APIs, tight integration with their app's own code, and Apple's supported path for iOS and macOS UI tests.",
-    prowlAngle:
-      "Prowl drives macOS apps from the outside through the Accessibility API, so hunts are YAML rather than Swift and need no Xcode project — and the same steps also run against your web app. XCUITest stays the better fit when you want to write tests in Swift alongside the app and reach in-process APIs. Prowl's macOS target is experimental and its helper builds from source today; a signed, prebuilt helper is the next milestone.",
-  },
-  {
-    name: "Cypress",
-    what: "A JavaScript and TypeScript end-to-end test runner for the web with an interactive runner and time-travel debugging.",
-    bestFor:
-      "Front-end teams who want a developer-friendly, in-browser testing experience with an interactive runner and their tests written in JavaScript or TypeScript.",
-    prowlAngle:
-      "Prowl covers the same web end-to-end journeys from YAML and extends the same test format to a native macOS app. Cypress remains a strong choice for web-only teams who want an interactive JavaScript authoring loop.",
-  },
-  {
-    name: "Selenium",
-    what: "The long-established, W3C WebDriver-based browser automation project with bindings across many programming languages.",
-    bestFor:
-      "Teams who need broad cross-browser web automation across many language bindings, backed by the mature WebDriver standard and a large grid and integration ecosystem.",
-    prowlAngle:
-      "Prowl focuses on a single YAML format for web and native macOS apps rather than a multi-language WebDriver API. Selenium is the more established choice when you need its breadth of language bindings and grid infrastructure.",
-  },
-];
 
 export interface UniqueAngle {
   title: string;
@@ -122,47 +67,6 @@ export const uniqueAngles: UniqueAngle[] = [
     title: "Escape hatches when YAML isn't enough",
     detail:
       "runHunt composition, if / repeat, runtime variables, and evalScript / runScript handle the awkward flows — and the library API lets you graduate a gnarly journey to TypeScript without leaving Prowl.",
-  },
-];
-
-export interface PainPoint {
-  /** The frustration, paraphrased as a general practitioner pain point. */
-  pain: string;
-  /** How Prowl addresses it — factual, with honest caveats. */
-  answer: string;
-}
-
-/**
- * The narrative spine of the page: real testing frustrations (paraphrased from
- * practitioner discussion, prowl 2026-08-16 research) with Prowl's honest
- * answer. These are pain points, NOT testimonials about Prowl — never attribute
- * them to a named person or present them as endorsements.
- */
-export const painPoints: PainPoint[] = [
-  {
-    pain: "“Flakiness drives me up the wall — debugging timing issues or CI failures that pass fine locally.”",
-    answer:
-      "On the web, Playwright's auto-waiting removes most timing races, and every step is deterministic and scripted rather than a fixed sleep. prowl flaky scores instability across runs and failures cluster so you triage a pattern, not a hundred logs. Honest caveat: the macOS target is black-box accessibility automation, so it asserts on observable UI state rather than an in-process idle signal like Espresso's.",
-  },
-  {
-    pain: "“Reliable, but the boilerplate and the instrumentation build are a slog.”",
-    answer:
-      "A hunt is about a dozen lines of YAML with no instrumentation build and no compile step. The trade-off is platform coverage: Prowl leads on macOS and web, and its mobile targets stay experimental for now.",
-  },
-  {
-    pain: "“YAML starts to feel like a cage the moment I need more control.”",
-    answer:
-      "Prowl keeps escape hatches: runHunt composition, if / repeat, runtime variables, and evalScript / runScript for the awkward parts — and the library API to graduate a flow to full TypeScript when it earns it.",
-  },
-  {
-    pain: "“The app has no IDs or anything useful to select on.”",
-    answer:
-      "Prowl leans on stable selectors — accessibility ids, roles, and labels — and prowl analyze ranks the most robust selector for each element so you are not guessing at brittle ones.",
-  },
-  {
-    pain: "“I want something agent-native and AI-assisted that runs locally on my own key, with no lock-in.”",
-    answer:
-      "That is Prowl's mission. Structured JSON output and an MCP server make it agent-native, AI-assisted steps run on your own provider key — paid directly to the provider, never routed through us — and everything Prowl produces (hunts, history, baselines) stays in your repo. No metered pricing, no lock-in.",
   },
 ];
 

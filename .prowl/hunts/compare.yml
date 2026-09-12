@@ -17,15 +17,7 @@ steps:
   - assert:
       visible: "One test format, desktop first"
 
-  # Pain-point narrative spine
-  - assert:
-      visible: "The frustrations we built around"
-
-  # "Best for" competitor profiles
-  - assert:
-      visible: "What each tool is best at"
-
-  # Capability matrix
+  # Capability cards
   - assert:
       visible: "Side by side"
 
@@ -41,9 +33,8 @@ assertions:
   # Exactly one top-level heading (accessible document outline / SEO).
   - selectorExists: "h1"
   - selectorNotExists: ":nth-match(h1, 2)"
-  # In-page anchors used by the hero CTA and internal links.
+  # In-page anchor used by the hero CTA.
   - selectorExists: "#matrix"
-  - selectorExists: "#best-for"
   # Primary CTA points at the docs site.
   - selectorExists: "a[href^='https://docs.prowl.tools']"
   # No fabricated-testimonial placeholder renders while the data array is empty.

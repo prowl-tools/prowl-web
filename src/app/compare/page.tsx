@@ -3,8 +3,6 @@ import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import CompareHero from '@/components/compare/CompareHero';
 import UniqueAngle from '@/components/compare/UniqueAngle';
-import PainPoints from '@/components/compare/PainPoints';
-import CompetitorProfiles from '@/components/compare/CompetitorProfiles';
 import CompareMatrix from '@/components/compare/CompareMatrix';
 import NotForYou from '@/components/compare/NotForYou';
 import Testimonials from '@/components/compare/Testimonials';
@@ -53,8 +51,6 @@ export default function ComparePage() {
       <main>
         <CompareHero />
         <UniqueAngle />
-        <PainPoints />
-        <CompetitorProfiles />
         <CompareMatrix />
         <NotForYou />
         {/* Renders nothing until real, attributed testimonials exist. */}
