@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { motion } from 'motion/react';
 import SectionReveal from '@/components/ui/SectionReveal';
 import { fadeUp, staggerContainer } from '@/lib/animations';
@@ -11,26 +10,28 @@ import {
   comparisonRows,
 } from '@/lib/comparison-data';
 
-export default function Comparison() {
+/**
+ * Capability matrix on /compare. Reuses `comparison-data.ts` — the same single
+ * source of reviewable claims the homepage table renders — so the two never
+ * drift. The homepage keeps its own `Comparison` section; this is the fuller
+ * page's copy of the same data with page-appropriate framing.
+ */
+export default function CompareMatrix() {
   const reveal = useScrollReveal();
 
   return (
     <SectionReveal>
-      <section id="compare" className="px-6 pb-24 scroll-mt-20">
-        <motion.div
-          className="mx-auto w-full max-w-7xl"
-          variants={staggerContainer}
-          {...reveal}
-        >
+      <section id="matrix" className="px-6 pb-20 scroll-mt-20">
+        <motion.div className="mx-auto w-full max-w-7xl" variants={staggerContainer} {...reveal}>
           <motion.p variants={fadeUp} className="text-xs uppercase tracking-[0.2em] text-muted">
-            How it compares
+            Capability at a glance
           </motion.p>
           <motion.h2 variants={fadeUp} className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
-            Desktop and web from the same file
+            Side by side
           </motion.h2>
           <motion.p variants={fadeUp} className="mt-3 max-w-3xl text-muted">
-            Mobile-first and web-only tools each cover part of a Mac developer&apos;s app; Prowl covers
-            the native app and the web app with one test format.
+            The capabilities that most often decide the choice, stated factually from each
+            project&apos;s public documentation.
           </motion.p>
 
           <motion.div
@@ -76,16 +77,6 @@ export default function Comparison() {
               </tbody>
             </table>
           </motion.div>
-
-          <motion.p variants={fadeUp} className="mt-6 text-sm">
-            <Link
-              href="/compare"
-              className="inline-flex items-center gap-1 font-semibold text-cyan hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan rounded-sm"
-            >
-              See the full comparison
-              <span aria-hidden="true">&rarr;</span>
-            </Link>
-          </motion.p>
 
           <motion.p variants={fadeUp} className="mt-4 max-w-4xl text-xs leading-relaxed text-muted">
             {comparisonDisclaimer}

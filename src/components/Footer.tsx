@@ -116,6 +116,9 @@ export default function Footer() {
             <h4 className="font-semibold mb-3 text-xs uppercase tracking-wider text-muted">Resources</h4>
             <ul className="space-y-2 text-muted">
               <li>
+                <Link href="/compare" className={footerLinkClass}>Compare</Link>
+              </li>
+              <li>
                 <Link href="/blog" className={footerLinkClass}>Blog</Link>
               </li>
               <li>
