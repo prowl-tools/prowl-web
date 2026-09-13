@@ -12,6 +12,12 @@ All notable changes to the Prowl Tools marketing site (`prowl.tools`) are docume
   `src/lib/blog.ts`) was unaffected. `next.config.ts` now registers
   `remark-frontmatter`, and the blog hunt asserts frontmatter text is not
   visible in the rendered post.
+- Scroll-reveal animations no longer trigger React's "A props object containing a
+  `key` prop is being spread into JSX" console error on every page load.
+  `useScrollReveal` returned its remount `key` inside the spreadable props object;
+  it now returns `{ remountKey, motionProps }` so the key is passed directly
+  (`key={reveal.remountKey}`) and only key-free motion props are spread — across
+  all 13 consuming components.
 
 ### Removed
 - Removed Prowl Hub and Prowl Infra Hub from the site (PQW-025; both repos were
@@ -37,7 +43,37 @@ All notable changes to the Prowl Tools marketing site (`prowl.tools`) are docume
   showcase/hunt count. Updated the landing hunts (`nav-desktop.yml`,
   `docs-page.yml`, `homepage.yml`) and deleted `code-review-page.yml`.
 
+### Changed
+- The homepage's full "How Prowl compares" table is replaced by a slim teaser band
+  ("How does Prowl compare?") linking to the new `/compare` page (owner decision,
+  2026-09-12, cutting homepage length): `src/components/Comparison.tsx` is removed,
+  `src/components/CompareTeaser.tsx` takes its slot, and the capability matrix plus
+  every comparative claim now render only on `/compare` (the
+  `src/lib/comparison-data.ts` module and its tests are unchanged — `/compare`'s
+  matrix still consumes it as the single source of claims).
+
 ### Added
+- Competitive-positioning comparison page at `/compare` (implements the cross-repo
+  item `prowl` PROWL-037 / GTM-002): a dedicated, SEO/GEO-targeted landing page for
+  "Maestro / Playwright / XCUITest alternative" searches. Sections: a hero, Prowl's desktop-first
+  unique angle, a per-tool capability card
+  grid (one card per tool with status icons, Prowl's card accented — owner pick from
+  three format options, 2026-09-12) reusing
+  `src/lib/comparison-data.ts` as the single source of claims, an honest "not for
+  you if…" section, a testimonials block that renders nothing while its data array is
+  intentionally empty (no fabricated quotes/logos ever), and a comparison FAQ
+  carrying the page-wide trademark disclaimer. (A practitioner pain-point section
+  and per-competitor "best for" profiles were drafted and then cut — owner
+  decision, 2026-09-12: not relevant enough to keep.)
+  Claims live in reviewable data modules (`src/lib/competitors-data.ts`,
+  `src/lib/compare-faq-data.ts`, `src/lib/testimonials-data.ts`) — factual, dated
+  (`compareAsOf`), non-disparaging, with a trademark disclaimer naming every
+  competitor and Prowl's mobile/macOS targets kept labelled experimental (LEGAL-004).
+  Page metadata sets a `/compare` canonical, OG, and Twitter cards; the route is added
+  to the sitemap (priority 0.9) and linked from the nav (desktop + mobile) and the
+  footer Resources column. Unit tests cover the data modules and the sitemap entry,
+  and a `compare` hunt asserts the sections, the single `h1`, the CTA, and that no
+  testimonial placeholder renders.
 - Desktop-first homepage (PQW-027, re-scoping PQW-024): a new hero that leads with
   native macOS apps and web apps from one YAML hunt (using the menu bar example
   from the macOS target guide), a "Change the target, not the test" section that

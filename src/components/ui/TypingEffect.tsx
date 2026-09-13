@@ -33,7 +33,8 @@ export default function TypingEffect({ lines }: TypingEffectProps) {
   return (
     <motion.span
       className="block"
-      {...reveal}
+      key={reveal.remountKey}
+      {...reveal.motionProps}
       variants={containerVariants}
     >
       {lines.map((line) => (
