@@ -31,6 +31,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
+      // Competitive-positioning page (prowl PROWL-037 / GTM-002). A durable
+      // landing page targeting "Maestro / Playwright / XCUITest alternative"
+      // searches, ranked just below the homepage.
+      url: "https://prowl.tools/compare",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
       url: "https://prowl.tools/blog",
       lastModified: latestBlogPostDate ?? new Date(),
       changeFrequency: "weekly",

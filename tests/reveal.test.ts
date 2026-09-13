@@ -7,30 +7,39 @@ import {
   revealVisible,
 } from '../src/lib/reveal.ts';
 
-test('keeps reveal content visible before hydration', () => {
-  assert.strictEqual(
-    getScrollRevealProps({ hydrated: false, reducedMotion: false }),
-    revealVisible,
-  );
+test('keeps reveal content visible before hydration, with no remount key', () => {
+  const reveal = getScrollRevealProps({ hydrated: false, reducedMotion: false });
+
+  assert.strictEqual(reveal.remountKey, undefined);
+  assert.strictEqual(reveal.motionProps, revealVisible);
 });
 
-test('keeps reveal content visible when reduced motion is preferred', () => {
-  assert.strictEqual(
-    getScrollRevealProps({ hydrated: true, reducedMotion: true }),
-    revealVisible,
-  );
+test('keeps reveal content visible when reduced motion is preferred, with no remount key', () => {
+  const reveal = getScrollRevealProps({ hydrated: true, reducedMotion: true });
+
+  assert.strictEqual(reveal.remountKey, undefined);
+  assert.strictEqual(reveal.motionProps, revealVisible);
 });
 
 test('returns remounting viewport reveal props after hydration', () => {
   assert.deepStrictEqual(
     getScrollRevealProps({ hydrated: true, reducedMotion: false, margin: '-120px' }),
     {
-      key: 'scroll-reveal:-120px',
-      initial: 'hidden',
-      whileInView: 'visible',
-      viewport: { once: true, margin: '-120px' },
+      remountKey: 'scroll-reveal:-120px',
+      motionProps: {
+        initial: 'hidden',
+        whileInView: 'visible',
+        viewport: { once: true, margin: '-120px' },
+      },
     },
   );
+});
+
+test('the spreadable motion props never carry a React key', () => {
+  const hydrated = getScrollRevealProps({ hydrated: true, reducedMotion: false });
+
+  assert.ok(!('key' in hydrated.motionProps));
+  assert.ok(!('key' in revealVisible));
 });
 
 test('does not queue hydration work on the server', () => {

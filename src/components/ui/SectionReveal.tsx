@@ -16,7 +16,8 @@ export default function SectionReveal({ children, className, delay = 0 }: Sectio
   return (
     <motion.div
       variants={fadeUp}
-      {...reveal}
+      key={reveal.remountKey}
+      {...reveal.motionProps}
       transition={{ delay }}
       className={className}
     >

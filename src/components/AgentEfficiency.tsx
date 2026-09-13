@@ -109,7 +109,8 @@ export default function AgentEfficiency() {
     <SectionReveal>
       <section id="agent-efficiency" className="px-6 pb-24 max-w-5xl mx-auto scroll-mt-20">
         <motion.div
-          {...reveal}
+          key={reveal.remountKey}
+          {...reveal.motionProps}
           variants={staggerContainer}
         >
           {/* Header */}

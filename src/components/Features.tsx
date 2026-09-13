@@ -83,7 +83,8 @@ export default function Features() {
   return (
     <section className="px-6 pb-24 max-w-5xl mx-auto">
       <motion.div
-        {...reveal}
+        key={reveal.remountKey}
+        {...reveal.motionProps}
         variants={staggerContainer}
       >
         <motion.h2 variants={fadeUp} className="text-3xl sm:text-4xl font-bold text-center mb-14">

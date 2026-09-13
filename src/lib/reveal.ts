@@ -3,8 +3,18 @@
 import { createContext, createElement, useContext, useSyncExternalStore, type ReactNode } from 'react';
 import { useReducedMotion, type MotionProps } from 'motion/react';
 
-export type RevealMotionProps = Pick<MotionProps, 'initial' | 'animate' | 'whileInView' | 'viewport'> & {
-  key?: string;
+export type RevealMotionProps = Pick<MotionProps, 'initial' | 'animate' | 'whileInView' | 'viewport'>;
+
+/**
+ * The scroll-reveal state, split so the remount key can never be spread into
+ * JSX: pass `key={reveal.remountKey}` directly and spread only
+ * `reveal.motionProps`. React ignores a `key` arriving via spread and warns
+ * ("A props object containing a \"key\" prop is being spread into JSX"), and
+ * has announced the warning will become an error.
+ */
+export type ScrollRevealProps = {
+  remountKey: string | undefined;
+  motionProps: RevealMotionProps;
 };
 
 type HydrationScheduler = (callback: () => void) => void;
@@ -126,7 +136,8 @@ function useHydrated(): boolean {
  * and when `prefers-reduced-motion` is set, it returns {@link revealVisible} so
  * the content is always visible — nothing ships as `opacity:0`. Only once the
  * component has hydrated with motion allowed does it enable the `hidden` ->
- * `visible` scroll-triggered entrance. The returned `key` intentionally remounts
+ * `visible` scroll-triggered entrance. The returned `remountKey` (passed as the
+ * element's `key` directly, never spread) intentionally remounts
  * the Motion element at that point, because Motion only applies `initial` on
  * mount; changing `initial` after the SSR-visible mount would leave the element
  * visible and skip the reveal. Because these sections are off-screen at the
@@ -141,20 +152,22 @@ export function getScrollRevealProps({
   hydrated,
   reducedMotion,
   margin = '-80px',
-}: ScrollRevealState): RevealMotionProps {
+}: ScrollRevealState): ScrollRevealProps {
   if (!hydrated || reducedMotion) {
-    return revealVisible;
+    return { remountKey: undefined, motionProps: revealVisible };
   }
 
   return {
-    key: `scroll-reveal:${margin}`,
-    initial: 'hidden',
-    whileInView: 'visible',
-    viewport: { once: true, margin },
+    remountKey: `scroll-reveal:${margin}`,
+    motionProps: {
+      initial: 'hidden',
+      whileInView: 'visible',
+      viewport: { once: true, margin },
+    },
   };
 }
 
-export function useScrollReveal(margin = '-80px'): RevealMotionProps {
+export function useScrollReveal(margin = '-80px'): ScrollRevealProps {
   const hydrated = useHydrated();
   const reducedMotion = useReducedMotion();
 

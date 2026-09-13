@@ -13,6 +13,7 @@ test('sitemap includes the homepage, the blog index, the RSS feed, and every pos
   const blogPostUrls = posts.map((post) => `${SITE_URL}/blog/${post.slug}`);
 
   assert.ok(urls.includes(SITE_URL));
+  assert.ok(urls.includes(`${SITE_URL}/compare`));
   assert.ok(urls.includes(`${SITE_URL}/blog`));
   assert.ok(urls.includes(`${SITE_URL}/blog/feed.xml`));
 
@@ -37,6 +38,12 @@ test('sitemap entries include expected metadata', () => {
   assert.ok(homepage.lastModified instanceof Date);
   assert.equal(homepage.changeFrequency, 'weekly');
   assert.equal(homepage.priority, 1);
+
+  const compare = entriesByUrl.get(`${SITE_URL}/compare`);
+  assert.ok(compare);
+  assert.ok(compare.lastModified instanceof Date);
+  assert.equal(compare.changeFrequency, "monthly");
+  assert.equal(compare.priority, 0.9);
 
   const blogIndex = entriesByUrl.get(`${SITE_URL}/blog`);
   assert.ok(blogIndex);
