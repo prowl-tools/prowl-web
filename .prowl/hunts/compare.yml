@@ -12,6 +12,8 @@ steps:
   # Hero (the page's single h1)
   - assert:
       visible: "How does Prowl compare"
+  - assert:
+      visible: "Prowl combines native macOS and web testing"
 
   # Prowl's unique angle — desktop-first
   - assert:
@@ -37,6 +39,8 @@ assertions:
   - selectorExists: "#matrix"
   # Primary CTA points at the docs site.
   - selectorExists: "a[href^='https://docs.prowl.tools']"
+  # Secondary CTA links back to the homepage's How it works section.
+  - selectorExists: "a[href='/#how-it-works']"
   # No fabricated-testimonial placeholder renders while the data array is empty.
   - selectorNotExists: "blockquote"
   # PQW-025: no retired product links anywhere on the page.

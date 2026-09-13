@@ -5,6 +5,10 @@ All notable changes to the Prowl Tools marketing site (`prowl.tools`) are docume
 ## [Unreleased]
 
 ### Fixed
+- The `/compare` page now links its "See how Prowl works" CTA directly to the
+  homepage's `#how-it-works` section, and its hero copy describes Prowl's
+  differentiator as combined native macOS and web testing from one YAML hunt
+  instead of claiming no competitor can test native macOS apps.
 - Blog post bodies no longer render their YAML frontmatter as content. The MDX
   compiler (`@next/mdx`) had no `remark-frontmatter` plugin, so the frontmatter
   block appeared as a bold heading at the top of every post (the closing `---`

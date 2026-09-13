@@ -40,9 +40,9 @@ export default function CompareHero() {
           variants={fadeUp}
           className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted sm:text-lg"
         >
-          Every one of these tools is genuinely good at something. Prowl holds the one
-          position none of them do; testing native macOS apps. Here is an honest look at
-          where each fits, and where Prowl leads.
+          Every one of these tools is genuinely good at something. Prowl combines native
+          macOS and web testing in one YAML hunt. Here is an honest look at where each
+          tool fits, and where Prowl leads.
         </motion.p>
 
         <motion.div

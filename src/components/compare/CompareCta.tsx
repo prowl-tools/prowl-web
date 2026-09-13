@@ -26,7 +26,7 @@ export default function CompareCta() {
                 Get started
               </a>
               <Link
-                href="/"
+                href="/#how-it-works"
                 className="inline-flex items-center justify-center rounded-md border border-border bg-background/85 px-6 py-3 text-sm font-semibold transition hover:border-cyan/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan"
               >
                 See how Prowl works
